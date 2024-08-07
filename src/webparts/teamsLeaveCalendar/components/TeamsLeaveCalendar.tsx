@@ -27,7 +27,7 @@ const localizer = momentLocalizer(moment)
 
 
 export interface FormState {
-  UpcomingEvents: {
+  AllLeaveItems: {
     id: string;
     title: string;
     start: any;
@@ -35,7 +35,7 @@ export interface FormState {
     Type: string;
     className?: string; // Add className for styling
   }[];
-  SelectedEventItems: any[];
+  SelectedLeaveItem: any[];
   SelectedPermissionItem: any[];
   CurrentView: any;
   selectedDate: any;
@@ -45,20 +45,20 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
   public constructor(props: ITeamsLeaveCalendarProps, state: FormState) {
     super(props);
     this.state = {
-      // UpcomingEvents: [{
+      // AllLeaveItems: [{
       //   id: "1",
       //   title: "Test",
       //   start: "08/07/2024",
       //   end: "08/10/2024",
       // }],
-      UpcomingEvents: [],
-      SelectedEventItems: [],
+      AllLeaveItems: [],
+      SelectedLeaveItem: [],
       CurrentView: "month",
       SelectedPermissionItem: [],
       selectedDate: new Date()
     }
-    NewWeb = Web("" + this.props.siteurl + "")
-    // NewWeb = Web("https://tmxin.sharepoint.com/sites/lms")
+    // NewWeb = Web("" + this.props.siteurl + "")
+    NewWeb = Web("https://tmxin.sharepoint.com/sites/lms")
     this.handleNavigate = this.handleNavigate.bind(this);
 
   }
@@ -91,7 +91,7 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
         .items.select("*").filter(`ID eq ${ID}`).expand("AttachmentFiles").get();
       console.log(items)
       this.setState({
-        SelectedEventItems: items
+        SelectedLeaveItem: items
       });
       $("#LeaveRequest-table-details").show();
     } else if (Type == "Permission") {
@@ -108,7 +108,7 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
       .then((items: any) => {
         console.log(items)
         if (items.length !== 0) {
-          const formattedEvents = items.map((item: any) => {
+          const leaveRequestItems = items.map((item: any) => {
             // Parse the StartDate and EndDate from the backend list
             // const startDate = moment(item.StartDate).format("MM/DD/YYYY");
             // const endDate = moment(item.EndDate).add(1, 'day').format("MM/DD/YYYY");
@@ -122,11 +122,7 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
               Type: "Leave"
             };
           });
-
-          this.setState({
-            UpcomingEvents: formattedEvents
-          });
-          this.getPermissionRequestDetails(formattedEvents)
+          this.getPermissionRequestDetails(leaveRequestItems)
         }
 
       });
@@ -136,7 +132,7 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
       .then((items: any) => {
         console.log(items)
         if (items.length !== 0) {
-          const formattedEvents = items.map((item: any) => {
+          const permissionRequestItems = items.map((item: any) => {
             // Parse the StartDate and EndDate from the backend list
             // const startDate = moment(item.timefromwhen, "DD-MM-YYYY hh:mm A").format("MM/DD/YYYY");
             // const endDate = moment(item.TimeUpto, "DD-MM-YYYY hh:mm A").format("MM/DD/YYYY");
@@ -151,11 +147,11 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
             };
           });
           // Merge existing events with new permission events
-          const allEvents = existingEvents.concat(formattedEvents);
+          const allEvents = existingEvents.concat(permissionRequestItems);
           this.setState({
-            UpcomingEvents: allEvents
+            AllLeaveItems: allEvents
           });
-          console.log("Upcoming Events:", this.state.UpcomingEvents);
+          console.log("Upcoming Events:", this.state.AllLeaveItems);
 
         }
 
@@ -178,13 +174,6 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
     }
   }
   public render(): React.ReactElement<ITeamsLeaveCalendarProps> {
-    // const {
-    //   description,
-    //   isDarkTheme,
-    //   environmentMessage,
-    //   hasTeamsContext,
-    //   userDisplayName
-    // } = this.props;
 
     return (
       <>
@@ -193,7 +182,7 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
             <div className="row store-wrap user_calendar">
               <Calendar
                 localizer={localizer}
-                events={this.state.UpcomingEvents}
+                events={this.state.AllLeaveItems}
                 startAccessor="start"
                 endAccessor="end"
                 view={this.state.CurrentView}
@@ -233,7 +222,7 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
                       </tr>
                     </thead>
                     <tbody>
-                      {this.state.SelectedEventItems && this.state.SelectedEventItems.map((item, key) => {
+                      {this.state.SelectedLeaveItem && this.state.SelectedLeaveItem.map((item, key) => {
                         return (
                           <tr>
                             <td>{key + 1}</td>
@@ -247,7 +236,7 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
                             <td>{item.ManagerComments != null ? item.ManagerComments : "-"}</td>
                             <td className='files-section'>
                               {item.AttachmentFiles.length != 0 ?
-                                <a href={item.AttachmentFiles[0].ServerRelativeUrl} target="_blank" rel="noopener noreferrer">{item.AttachmentFiles[0].FileName}</a>
+                                <a href={item.AttachmentFiles[0].ServerRelativeUrl} target="_blank" data-interception='off' rel="noopener noreferrer">{item.AttachmentFiles[0].FileName}</a>
                                 : "-"}
                             </td>
                           </tr>

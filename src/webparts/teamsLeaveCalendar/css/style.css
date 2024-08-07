@@ -4832,7 +4832,7 @@ border:1px;
 
 .rbc-toolbar-label {
     padding: 10px !important;
-    background: #008c99 !important;
+    /* background: #008c99 !important; */
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     color: #fff;
@@ -4840,6 +4840,8 @@ border:1px;
 
 .rbc-toolbar {
     margin-bottom: 0px !important;
+    background: #008c99 !important;
+
 }
 
 .rbc-header {
