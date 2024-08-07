@@ -12,15 +12,12 @@ import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import * as moment from "moment";
 import * as $ from "jquery";
-import "../css/style.css";
-import "../css/responsive.css"
 
 
 
 SPComponentLoader.loadCss(`https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css`);
 SPComponentLoader.loadCss(`https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css`);
-// SPComponentLoader.loadCss('https://remodigital.sharepoint.com/:f:/r/sites/Remo/RemoSolutions/VTM/SiteAssets/Visitor%20and%20Trainee%20Assets/css/style.css?v=2.9');
-// SPComponentLoader.loadCss('https://remodigital.sharepoint.com/:f:/r/sites/Remo/RemoSolutions/VTM/SiteAssets/Visitor%20and%20Trainee%20Assets/css/responsivestyle.css?v=2.9');
+
 
 var NewWeb: any;
 const localizer = momentLocalizer(moment)
@@ -60,6 +57,9 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
     // NewWeb = Web("" + this.props.siteurl + "")
     NewWeb = Web("https://tmxin.sharepoint.com/sites/lms")
     this.handleNavigate = this.handleNavigate.bind(this);
+
+    SPComponentLoader.loadCss('' + this.props.siteurl + '/SiteAssets/TeamsLeaveCalendar/css/style.css?v=2.9');
+    SPComponentLoader.loadCss('' + this.props.siteurl + '/SiteAssets/TeamsLeaveCalendar/css/responsive.css?v=2.9');
 
   }
   public componentDidMount() {
