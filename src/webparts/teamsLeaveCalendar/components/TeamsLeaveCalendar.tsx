@@ -38,6 +38,7 @@ export interface FormState {
   SelectedEventItems: any[];
   SelectedPermissionItem: any[];
   CurrentView: any;
+  selectedDate: any;
 }
 
 export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalendarProps, FormState, {}> {
@@ -53,9 +54,11 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
       UpcomingEvents: [],
       SelectedEventItems: [],
       CurrentView: "month",
-      SelectedPermissionItem: []
+      SelectedPermissionItem: [],
+      selectedDate: new Date()
     }
     NewWeb = Web("" + this.props.siteurl + "")
+    // NewWeb = Web("https://tmxin.sharepoint.com/sites/lms")
     this.handleNavigate = this.handleNavigate.bind(this);
 
   }
@@ -80,7 +83,6 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
   };
   public async handleEventClick(event: any, e: React.SyntheticEvent): Promise<void> {
     e.preventDefault();
-    console.log("Event:", event)
     var ID = event.id
     var Type = event.Type
 
@@ -129,14 +131,15 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
   public getPermissionRequestDetails(existingEvents: any[]) {
     NewWeb.lists.getByTitle("EmployeePermission").items.select("*").filter(`Status eq 'Approved'`).getAll()
       .then((items: any) => {
+        console.log(items)
         if (items.length !== 0) {
           const formattedEvents = items.map((item: any) => {
             // Parse the StartDate and EndDate from the backend list
-            const startDate = moment(item.timefromwhen).format("DD/MM/YYYY");
-            const endDate = moment(item.TimeUpto).format("DD/MM/YYYY");
+            const startDate = moment(item.timefromwhen, "DD-MM-YYYY hh:mm A").format("MM/DD/YYYY");
+            const endDate = moment(item.TimeUpto, "DD-MM-YYYY hh:mm A").format("MM/DD/YYYY");
             return {
               id: item.ID,
-              title: `Permission - ${item.Requester}`,  // Ensure title is set correctly
+              title: `Permission - ${item.Requester}`,
               start: startDate,
               end: endDate,
               Type: "Permission"
@@ -157,6 +160,7 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
     var handler = this;
     handler.setState({
       CurrentView: "month",
+      selectedDate: newDate
     })
     $("#LeaveRequest-table-details").hide()
     $("#PermissionRequest-table-details").hide();
@@ -187,23 +191,24 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
                 events={this.state.UpcomingEvents}
                 startAccessor="start"
                 endAccessor="end"
-                // views=""
                 view={this.state.CurrentView}
                 onView={(view) => this.setState({ CurrentView: view })}
-                date=""
+                date={this.state.selectedDate}  // Bind the selectedDate state to the date prop
                 eventPropGetter={this.getEventStyle}
                 style={{ height: 405 }}
                 onNavigate={this.handleNavigate}
                 tooltipAccessor="Type"
                 onSelectEvent={(event, e) => this.handleEventClick(event, e)}
+                popup // Enable the built-in pop-up
               />
+
             </div>
           </div>
           <div className='table-popup' style={{ display: "none" }} id='LeaveRequest-table-details'>
             <div className='table-overlay_popup'>
               <div className="manual-booking-table view-event-table user-calendar">
                 <div className="table-responsive" id="table-content">
-                  <h4 className="events_title">Event Details</h4>
+                  <h4 className="events_title">Leave Request Details</h4>
                   <div className="popup_cancel" onClick={() => this.closeTable("Leave")}>
                     <img src={require("../Images/close-icon.svg")} />
                   </div>
@@ -230,8 +235,8 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
                             <td>{item.Status}</td>
                             <td>{item.LeaveType}</td>
                             <td>{item.Day}</td>
-                            <td>{item.StartDate}</td>
-                            <td>{item.EndDate}</td>
+                            <td>{moment(item.StartDate).format("DD-MMM-YYYY")}</td>
+                            <td>{moment(item.EndDate).format("DD-MMM-YYYY")}</td>
                             <td>{item.Reason}</td>
                             <td>{item.ManagerComments}</td>
 
@@ -251,7 +256,7 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
             <div className='table-overlay_popup'>
               <div className="manual-booking-table view-event-table user-calendar">
                 <div className="table-responsive" id="table-content">
-                  <h4 className="events_title">Event Details</h4>
+                  <h4 className="events_title">Permission Request Details</h4>
                   <div className="popup_cancel" onClick={() => this.closeTable("Permission")}>
                     <img src={require("../Images/close-icon.svg")} />
                   </div>
