@@ -1,0 +1,275 @@
+/* responsive CSS*/
+@media screen and (max-width: 1280px){
+    #genrate-info .overlay-1{
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 550px !important;
+      overflow-y: auto !important;
+    }
+    .booking-footer{
+        margin-bottom: 20px !important;
+    }
+    body .manual-booking-table .dataTables_filter input,
+    body .manual-right .manual-booking-table .dataTables_filter input{ 
+      width:auto !important;
+    } 
+    }
+    @media screen and (max-width: 1024px){
+    .column-1 {
+        width: 25%;
+    }
+    .manual-right {
+        width: calc(100% - 25%) !important;
+    }
+    .manual-wrap .add-map{
+        margin-top: 0px;
+    }
+    .manual-wrap .row>div{
+        margin-bottom:10px;
+    }
+    .manual-right .column-2{
+        padding-right: 0px;
+        width: 40%;
+    }
+    .manual-right .column-3{
+        padding-left: 0px;
+    }
+    }
+    
+    
+    @media screen and (max-width: 768px){
+    .logo-br {
+        margin-left: 0px;
+    }
+    .column-2 .row .col-md-6:first-child{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .add-map .col-md-12{
+        padding-left: 0px;
+    }
+    }
+    @media screen and (max-width: 600px){
+    
+        .logo-br{
+            margin:0;
+            margin-top:15px;
+            text-align: center;
+        }
+        .logo-br img{
+        width: 270px;
+        }
+        .AED:after {
+        left: 68px;
+        }
+        .notification-part ul {
+        padding-left: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        margin-top: 30px;
+    }
+    .notification-part li {
+        display: inline-flex;
+        padding-left: 0;
+    }
+      #header-section{
+          display: block !important;
+      }
+      .booking-header li{
+        display: inline-flex;
+        padding-left: 0;
+        padding-right: 0;
+    }
+     .booking-header ul{
+         display: block;
+        margin-top: 10px;
+     }
+     .column-1{
+         width:100%;
+         float: unset;
+     }
+     .store-wrap {
+        margin-left: 0;
+    }
+    .manual-right{
+        width: 100% !important;
+        float: unset !important;
+    }
+    .manual-right .column-2 {
+        padding-left: 25px;
+        width: 100%;
+        float: unset;
+            border: 0;
+    }
+    .column-2 .row .col-md-6:first-child {
+        padding-right: 0;
+        padding-left: 0;
+    }
+    .column-2 .row .col-md-6 input {
+        width: 100% !important;
+    }
+    .map-wrap {
+        width: 100%;
+    }
+    .add-map .col-md-12 {
+        padding: 0;
+        padding-left: 0px;
+    }
+    .store-section .store-wrap .add-map.b-hr .col-md-9 ul{
+        display: block;
+    }
+    .store-strt-end-time .col-md-5{
+        float: left;
+    }
+    .b-hr ul li.leavedays {
+         margin-bottom: 10px;
+    }
+    .add-map.b-hr{
+        padding-left: 0;
+    }
+    .store-strt-end-time .col-md-5 {
+        padding: 0;
+    }
+    .col-md-9.slot-duration{
+        margin-left: -15px;
+            margin-top: 25px;
+    }
+    .column-2 .row .col-md-6:first-child{
+        padding: 0 !important;
+    }
+    #slot-start-time {
+        width: 100%;
+        border: 0 !important;
+    }
+    .book-strt-end-time .col-md-6:last-child {
+        text-align: left;
+        padding: 0 !important;
+    }
+    #slot-end-time {
+        width: 100%;
+        border: 0 !important;
+    }
+    .book-strt-end-time .manual-book {
+        width: 100%;
+    }
+    .schedule-meet-chkbox {
+        padding-left: 0;
+    }
+    .nxt-btn-wrap {
+        text-align: left;
+        margin-right: 0 !important;
+        margin-top: 30px;
+    }
+    .column-1 ul{
+        margin-bottom: 15px;  
+    }
+    .store-section .column-2 .row .col-md-6 {
+        padding: 0;
+        margin-bottom: 20px;
+    }
+    .store-section .column-2 .row .col-md-6:last-child{
+        margin-bottom:5px;
+    }
+    /* 25.01.2024 updated css by jothipriya */
+    .manual-wrap{
+        padding-left: 10px;
+    }
+    .manual-booking-data .manual-book-save-btn{
+        position: unset;
+        margin-top: 0px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .manual-booking-data #store-name {
+        width: 100%;
+    }
+    #txt-map-location {
+        width: 100%; 
+    }
+    .manual-right{
+        border-left: none !important;
+    }
+    .store-booking-page .manual-booking-table{
+      padding-left:0px;
+    }
+    .table-responsive{
+      border:none;
+    }
+    .export-btn{
+        padding: 4px 8px;
+    }
+    .export-btn-wrap{
+        margin-bottom: 5px;
+    }
+    .store-booking-page .store-section .store-wrap{
+        padding: 0px;
+    } 
+    #table-example_length{
+        top: unset;
+        margin-top: -38px;
+        margin-left: -34px;
+        font-size: 12px;
+    }
+    #table-example_filter{
+        top: unset;
+        margin-top: -39px;
+        font-size: 12px;
+        margin-right: -15px;
+    }
+    #table-example_filter input{
+        width: 145px !important;
+    }
+    .manual-booking-table .table-responsive {
+        padding-bottom: 55px;
+        margin-bottom: 0px;
+    }
+    #table-example_info{
+        padding-top: 0px;
+        left: 0px;
+    }
+    #manual-bkng-form .manual-wrap{
+      padding-left:0px;
+    }
+    #manual-bkng-form .column-2{
+      padding-right: 40px;
+    }
+    .store-section #manual-bkng-form .column-2 .row .col-md-6{
+        margin-bottom: 0px !important;
+    }
+    #manual-bkng-form .column-2 .row>div{
+      padding-bottom:10px !important;
+    }
+    }
+    @media screen and (max-width: 500px){
+        .notification-part.booking-header li:first-child{
+        width: 100%;
+        justify-content: center;
+    }
+    .notification-part.booking-header li#store, .notification-part.booking-header li#event{ 
+        float: left; 
+    }
+    #table-example_info{
+        position: absolute;
+        bottom: 6%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 100%;
+    }
+    #table-example_paginate{
+        position: absolute;
+        bottom: 1%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 100%;
+    }
+    .manual-booking-table .table-responsive{
+        padding-bottom: 70px;
+    }
+    } 
+    @media screen and (max-width: 320px){
+    #table-example_filter input {
+        width: 97px !important;
+    } 
+    }

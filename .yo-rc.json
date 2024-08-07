@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": false,
+    "nodeVersion": "18.18.0",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.12.0"
+    },
+    "version": "1.18.2",
+    "libraryName": "visitor",
+    "libraryId": "b62b8b8f-77f0-4e90-8faf-88d96c62ebb7",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "Visitor",
+    "solutionShortDescription": "Visitor description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "TeamsLeaveCalendar-client-side-solution",
+    "id": "b62b8b8f-77f0-4e90-8faf-88d96c62ebb7",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.18.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Visitor description"
+      },
+      "longDescription": {
+        "default": "Visitor description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "visitor Feature",
+        "description": "The feature that activates elements of the visitor solution.",
+        "id": "0e39a248-448d-4244-9ae3-8df56cf3ca3f",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/TeamsLeaveCalendar.sppkg"
+  }
+}
