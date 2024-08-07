@@ -88,7 +88,8 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
 
     if (Type == "Leave") {
       const items = await NewWeb.lists.getByTitle("LeaveRequest")
-        .items.select("*").filter(`ID eq ${ID}`).get();
+        .items.select("*").filter(`ID eq ${ID}`).expand("AttachmentFiles").get();
+      console.log(items)
       this.setState({
         SelectedEventItems: items
       });
@@ -109,8 +110,10 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
         if (items.length !== 0) {
           const formattedEvents = items.map((item: any) => {
             // Parse the StartDate and EndDate from the backend list
-            const startDate = moment(item.StartDate).format("MM/DD/YYYY");
-            const endDate = moment(item.EndDate).add(1, 'day').format("MM/DD/YYYY");
+            // const startDate = moment(item.StartDate).format("MM/DD/YYYY");
+            // const endDate = moment(item.EndDate).add(1, 'day').format("MM/DD/YYYY");
+            const startDate = new Date(item.StartDate);
+            const endDate = new Date(item.EndDate);
             return {
               id: item.ID,
               title: `${item.LeaveType} - ${item.Requester}`,  // Ensure title is set correctly
@@ -135,8 +138,10 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
         if (items.length !== 0) {
           const formattedEvents = items.map((item: any) => {
             // Parse the StartDate and EndDate from the backend list
-            const startDate = moment(item.timefromwhen, "DD-MM-YYYY hh:mm A").format("MM/DD/YYYY");
-            const endDate = moment(item.TimeUpto, "DD-MM-YYYY hh:mm A").format("MM/DD/YYYY");
+            // const startDate = moment(item.timefromwhen, "DD-MM-YYYY hh:mm A").format("MM/DD/YYYY");
+            // const endDate = moment(item.TimeUpto, "DD-MM-YYYY hh:mm A").format("MM/DD/YYYY");
+            const startDate = moment(item.timefromwhen, "DD-MM-YYYY hh:mm A").toDate();
+            const endDate = moment(item.TimeUpto, "DD-MM-YYYY hh:mm A").toDate();
             return {
               id: item.ID,
               title: `Permission - ${item.Requester}`,
@@ -224,6 +229,7 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
                         <th>End Date</th>
                         <th>Reason</th>
                         <th>Manager Comments</th>
+                        <th>Attachment</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -238,8 +244,12 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
                             <td>{moment(item.StartDate).format("DD-MMM-YYYY")}</td>
                             <td>{moment(item.EndDate).format("DD-MMM-YYYY")}</td>
                             <td>{item.Reason}</td>
-                            <td>{item.ManagerComments}</td>
-
+                            <td>{item.ManagerComments != null ? item.ManagerComments : "-"}</td>
+                            <td className='files-section'>
+                              {item.AttachmentFiles.length != 0 ?
+                                <a href={item.AttachmentFiles[0].ServerRelativeUrl} target="_blank" rel="noopener noreferrer">{item.AttachmentFiles[0].FileName}</a>
+                                : "-"}
+                            </td>
                           </tr>
                         )
                       })}
@@ -284,7 +294,7 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
                             <td>{item.TimeUpto}</td>
                             <td>{item.PermissionHour}</td>
                             <td>{item.Reason}</td>
-                            <td>{item.ManagerComments}</td>
+                            <td>{item.ManagerComments != null ? item.ManagerComments : "-"}</td>
 
                           </tr>
                         )
