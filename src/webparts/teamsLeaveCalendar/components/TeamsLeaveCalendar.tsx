@@ -177,6 +177,9 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
 
     return (
       <>
+        <div className="header">
+          <div><h4>Team Leave Calendar</h4></div>
+        </div>
         <section id='load-content'>
           <div className="store-section user-calendar">
             <div className="row store-wrap user_calendar">
