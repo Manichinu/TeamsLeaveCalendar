@@ -104,7 +104,7 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
     }
   }
   public getLeaveRequestDetails() {
-    NewWeb.lists.getByTitle("LeaveRequest").items.select("*").getAll()
+    NewWeb.lists.getByTitle("LeaveRequest").items.select("*").filter(`Status ne 'Cancelled' and Status ne 'Rejected'`).getAll()
       .then((items: any) => {
         console.log(items)
         if (items.length !== 0) {
@@ -128,7 +128,7 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
       });
   }
   public getPermissionRequestDetails(existingEvents: any[]) {
-    NewWeb.lists.getByTitle("EmployeePermission").items.select("*").getAll()
+    NewWeb.lists.getByTitle("EmployeePermission").items.select("*").filter(`Status ne 'Cancelled' and Status ne 'Rejected'`).getAll()
       .then((items: any) => {
         console.log(items)
         if (items.length !== 0) {
