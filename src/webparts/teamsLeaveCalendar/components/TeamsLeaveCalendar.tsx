@@ -213,6 +213,7 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
                     <thead>
                       <tr>
                         <th>S.No</th>
+                        <th>Requested On</th>
                         <th>Requestor Name</th>
                         <th>Status</th>
                         <th>Leave Type</th>
@@ -229,6 +230,7 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
                         return (
                           <tr>
                             <td>{key + 1}</td>
+                            <td>{moment(item.AppliedDate).format('DD-MM-YYYY')}</td>
                             <td>{item.Requester}</td>
                             <td>{item.Status}</td>
                             <td>{item.LeaveType}</td>
@@ -266,6 +268,7 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
                     <thead>
                       <tr>
                         <th>S.No</th>
+                        <th>Requested On</th>
                         <th>Requestor Name</th>
                         <th>Status</th>
                         <th>Start Time</th>
@@ -280,6 +283,7 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
                         return (
                           <tr>
                             <td>{key + 1}</td>
+                            <td>{moment(item.PermissionOn).format('DD-MM-YYYY')}</td>
                             <td>{item.Requester}</td>
                             <td>{item.Status}</td>
                             <td>{item.timefromwhen}</td>
