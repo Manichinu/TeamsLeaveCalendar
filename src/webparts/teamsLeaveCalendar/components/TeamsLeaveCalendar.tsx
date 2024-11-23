@@ -230,7 +230,7 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
                         return (
                           <tr>
                             <td>{key + 1}</td>
-                            <td>{moment(item.AppliedDate).format('DD-MM-YYYY')}</td>
+                            <td>{moment(item.AppliedDate).format('DD-MMM-YYYY')}</td>
                             <td>{item.Requester}</td>
                             <td>{item.Status}</td>
                             <td>{item.LeaveType}</td>
