@@ -104,7 +104,7 @@ export default class TeamsLeaveCalendar extends React.Component<ITeamsLeaveCalen
     }
   }
   public getLeaveRequestDetails() {
-    NewWeb.lists.getByTitle("LeaveRequest").items.select("*").filter(`Status ne 'Cancelled' and Status ne 'Rejected'`).getAll()
+    NewWeb.lists.getByTitle("LeaveRequest").items.select("*").filter(`Status ne 'Cancelled' and Status ne 'Rejected' and Status ne 'Cancellation Requested'`).getAll()
       .then((items: any) => {
         console.log(items)
         if (items.length !== 0) {
